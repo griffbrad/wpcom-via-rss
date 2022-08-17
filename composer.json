@@ -1,0 +1,7 @@
+{
+    "require": {
+    	"guzzlehttp/guzzle": "~6.0",
+        "zendframework/zend-dom": "^2.6",
+        "zendframework/zend-escaper": "^2.6"
+    }
+}

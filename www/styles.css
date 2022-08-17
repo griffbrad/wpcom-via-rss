@@ -1,0 +1,287 @@
+html,
+body {
+    font-family: "New York", "Noto Serif", Georgia, "Times New Roman", Times, serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    font-size: 1.2rem;
+    line-height: 1.56;
+    margin: 0 auto;
+    max-width: 100ex;
+    word-break: break-word;
+    padding: 10px 60px;
+}
+
+.list-group {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-group li {
+    clear: both;
+    margin-bottom: 3em;
+}
+
+.list-group img {
+    background: #666;
+    height: 75px;
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 75px;
+}
+
+.list-group small {
+    color: #666;
+    display: block;
+    font-size: 80%;
+}
+
+.list-group p {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+h1 {
+    color: #2e4453;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+h1 a {
+    color: #2e4453;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    color: #4f6675;
+}
+
+h2,
+h3,
+.comments .author,
+.comments .date,
+.avatar-list {
+    color: #87a6bc;
+    font-family: system-ui;
+    font-size: 1.2rem;
+}
+
+h3 {
+    color: #2e4453;
+    margin-bottom: 0;
+    margin-top: 4em;
+    padding-bottom: 0;
+    font-size: 1.5rem;
+}
+
+.avatar-list li {
+    color: #2e4453;
+    display: inline-block;
+}
+
+h2 {
+    text-transform: uppercase;
+}
+
+.comments p {
+    padding-left: 3.3rem;
+}
+
+.comments .author {
+    color: #2e4453;
+    font-weight: 700;
+}
+
+.child-comments {
+    margin-left: 2rem;
+}
+
+.comments .avatar img,
+.avatar-list img {
+    float: left;
+    border-radius: 3rem;
+    height: 3rem;
+    width: 3rem;
+}
+
+h1 small {
+    color: #87a6bc;
+    font-family: system-ui;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+table {
+    border: 1px solid #87a6bc;
+    border-radius: 4px;
+    font-family: system-ui;
+    padding: 1em;
+    width: 100%;
+}
+
+td,
+th {
+    padding-bottom: 1.5em;
+    padding-right: .5em;
+    text-align: left;
+    vertical-align: top;
+}
+
+td h2 {
+    margin: 0;
+}
+
+.note {
+    color: #666;
+}
+
+.alert {
+    background: #f6f6fb;
+    border-radius: 4px;
+    font-family: system-ui;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+.button-wrapper button {
+	margin: 0 .25rem;
+}
+
+.button-wrapper button.primary {
+    background: #0087be;
+	color: #fff;
+	box-shadow: 0 .25rem .5rem #ccc;
+}
+
+button,
+.button {
+	background: #fff;
+    border: 2px solid #0087be;
+    border-radius: 4px;
+    font-family: system-ui;
+    color: #0087be;
+    font-size: 80%;
+    margin: 0;
+    padding: .5em 2em;
+    text-decoration: none;
+}
+
+.button.secondary {
+    border: 1px solid #999;
+    background: #fff;
+    color: #333;
+}
+
+.button.secondary:hover {
+    color: #666;
+    border-color: #aaa;
+}
+
+.button.primary {
+    font-size: 150%;
+}
+
+.button.primary:hover {
+    background: #22a9df;
+}
+
+.alert button {
+    float: right;
+    position: relative;
+    top: -2px;
+}
+
+.clear {
+    clear: both;
+    content: ' ';
+    height: 0;
+    overflow: none;
+    width: 0;
+}
+
+.loading-overlay {
+    background: rgba(0, 0, 0, .6);
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 90%;
+    font-style: italic;
+    height: 100%;
+    left: 0;
+    padding-top: 35%;
+    position: absolute;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000;
+    top: 0;
+    width: 100%;
+}
+
+.error {
+    background: #eee;
+    border: 1px solid #666;
+    font-weight: bold;
+    margin: 30px;
+    padding: 30px;
+    text-align: center;
+}
+
+.help {
+    border-top: 1px solid #eee;
+    color: #666;
+    padding: 1em;
+    margin-top: 3em;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+	#content {
+		font-size: 1rem;
+    	padding: 10px;
+	}
+
+	h1 {
+		color: #2e4453;
+		font-size: 1.2rem;
+	}
+
+	h2,
+	h3,
+	.comments .author,
+	.comments .date,
+	.avatar-list {
+		font-size: 1rem;
+	}
+
+	.avatar-list {
+		line-height: 0;
+	}
+
+	.comments .avatar img,
+	.avatar-list img {
+		border-radius: 2rem;
+		height: 2rem;
+		width: 2rem;
+	}
+
+	.comments p {
+		padding-left: 2.3rem;
+	}
+
+	.child-comments {
+		margin-left: 0;
+	}
+
+	.root-comments > li > .child-comments {
+		margin-left: 2.2rem;
+	}
+}
