@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  app:
+    container_name: "wpcom-via-rss"
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: wpcomrss
+      DB_USER: wpcomrss
+      DB_PASSWORD: wpcomrss
+    env_file: .env
+    ports:
+      - "8966:80"
+
+  db:
+    container_name: "wpcom-via-rss-db"
+    image: docker.io/bitnami/mariadb:10.3-debian-10
+    environment:
+      MARIADB_DATABASE: wpcomrss
+      MARIADB_USER: wpcomrss
+      MARIADB_PASSWORD: wpcomrss
+      ALLOW_EMPTY_PASSWORD: yes
+    volumes:
+      - "./:/docker-entrypoint-initdb.d/"
