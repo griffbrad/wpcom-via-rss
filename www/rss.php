@@ -92,11 +92,11 @@ foreach (($response['posts'] ?? []) as $post) {
                 )
             );
 
-			if ($post_response && isset($post_response['content'])) {
-				$post['ID']       = $cross_post_id;
-				$post['site_ID']  = $cross_post_site;
-				$post['content'] .= $post_response['content'];
-			}
+                        if ($post_response && isset($post_response['content'])) {
+                                $post['ID']       = $cross_post_id;
+                                $post['site_ID']  = $cross_post_site;
+                                $post['content'] .= $post_response['content'];
+                        }
         }
     }
 
