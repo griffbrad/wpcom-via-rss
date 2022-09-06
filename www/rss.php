@@ -104,5 +104,6 @@ foreach (($response['posts'] ?? []) as $post) {
 }
 
 header('Content-Type: application/rss+xml');
+header('Content-Disposition: attachment; filename="rss.xml"');
 require __DIR__ . '/includes/rss-template.php';
 exit;
