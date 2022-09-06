@@ -45,6 +45,17 @@ $escaper = new Escaper();
                 <h2>a8c</h2>
                 <a href="<?php echo BASE_URI;?>/rss.php?team=a8c"><?php echo BASE_URI;?>/rss.php?team=a8c</a>
                 <?php endif;?>
+                <br />
+                <br />
+                <h2>OPML of individual feeds</h2>
+                <a href="<?php echo BASE_URI;?>/rss.php?format=opml"><?php echo BASE_URI;?>/rss.php?format=opml</a>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">More URL options</th>
+            <td>
+                <code>?limit=20</code> - how many posts to fetch; default 20<br />
+                <code>?blog=12345</code> - returns posts only from site 12345; get the URLs from OPML
             </td>
         </tr>
         <tr>
@@ -70,5 +81,5 @@ $escaper = new Escaper();
     </tbody>
 </table>
 
-<?php require __DIR__  . '/includes/help.php';?>
+<?php require __DIR__ . '/includes/help.php';?>
 <?php require __DIR__ . '/includes/footer.php';?>

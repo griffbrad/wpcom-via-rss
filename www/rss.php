@@ -30,53 +30,44 @@ function send_unauthorized_response()
     exit;
 }
 
-function get_sites()
-{
-	$response = request('/me/sites');
-
-    $out = [];
-
-    foreach ($response['sites'] as $site) {
-        $out[] = $site['ID'];
-    }
-
-    return $out;
-}
-
 function get_followed_sites()
 {
-	$response = request('/read/following/mine');
-
-    $out = [];
-
-    foreach ($response['subscriptions'] as $site) {
-        $out[] = $site['blog_ID'];
-    }
-
-    return $out;
+    return request('/read/following/mine')['subscriptions'];
 }
 
 $me = get_me();
 
-$sites = [];
-
 $followed_sites = get_followed_sites();
+$followed_site_ids = array_map(fn($site): int => intval($site['blog_ID']), $followed_sites);
 
-if (isset($_GET['team']) && 'a8c' === $_GET['team']) {
-    $path       = 'a8c';
+if( 'opml' == $_GET['format'] ) {
+    header('Content-Type: application/xml');
+    header('Content-Disposition: attachment; filename="opml.xml"');
+    require __DIR__ . '/includes/opml-template.php';
+    exit;
+}
+
+if (isset($_GET['blog'])) {
+    $blog       = intval( $_GET['blog'] );
+    $path       = '/sites/' . $blog . '/posts';
+    $feed_title = $blog;
+} else if (isset($_GET['team']) && 'a8c' === $_GET['team']) {
+    $path       = '/read/a8c';
     $feed_title = 'a8c';
 } else {
-    $path       = 'following';
+    $path       = '/read/following';
     $feed_title = 'WordPress.com';
 }
 
-$response = request('/read/' . $path . '?number=20');
+$limit = intval( $_GET['limit'] ?? 20 );
+
+$response = request($path . '?number=' . $limit);
 $posts    = [];
 
-foreach ($response['posts'] as $post) {
-	if ('Auto Draft' === $post['title']) {
-		continue;
-	}
+foreach (($response['posts'] ?? []) as $post) {
+        if ('Auto Draft' === $post['title']) {
+                continue;
+        }
 
     $cross_post_site = false;
     $cross_post_id   = null;
@@ -90,7 +81,7 @@ foreach ($response['posts'] as $post) {
     }
 
     if ($cross_post_site) {
-        if (in_array($cross_post_site, $followed_sites)) {
+        if (in_array($cross_post_site, $followed_site_ids)) {
             continue;
         } else {
             $post_response = request(
@@ -101,11 +92,11 @@ foreach ($response['posts'] as $post) {
                 )
             );
 
-			if ($post_response && isset($post_response['content'])) {
-				$post['ID']       = $cross_post_id;
-				$post['site_ID']  = $cross_post_site;
-				$post['content'] .= $post_response['content'];
-			}
+                        if ($post_response && isset($post_response['content'])) {
+                                $post['ID']       = $cross_post_id;
+                                $post['site_ID']  = $cross_post_site;
+                                $post['content'] .= $post_response['content'];
+                        }
         }
     }
 
@@ -113,6 +104,6 @@ foreach ($response['posts'] as $post) {
 }
 
 header('Content-Type: application/rss+xml');
+header('Content-Disposition: attachment; filename="rss.xml"');
 require __DIR__ . '/includes/rss-template.php';
 exit;
-
