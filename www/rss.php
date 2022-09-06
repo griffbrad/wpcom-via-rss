@@ -32,20 +32,13 @@ function send_unauthorized_response()
 
 function get_followed_sites()
 {
-	$response = request('/read/following/mine');
-
-    $out = [];
-
-    foreach ($response['subscriptions'] as $site) {
-        $out[] = $site['blog_ID'];
-    }
-
-    return $out;
+    return request('/read/following/mine')['subscriptions'];
 }
 
 $me = get_me();
 
 $followed_sites = get_followed_sites();
+$followed_site_ids = array_map(fn($site): int => intval($site['blog_ID']), $followed_sites);
 
 if (isset($_GET['team']) && 'a8c' === $_GET['team']) {
     $path       = 'a8c';
@@ -75,7 +68,7 @@ foreach ($response['posts'] as $post) {
     }
 
     if ($cross_post_site) {
-        if (in_array($cross_post_site, $followed_sites)) {
+        if (in_array($cross_post_site, $followed_site_ids)) {
             continue;
         } else {
             $post_response = request(
