@@ -70,5 +70,5 @@ $escaper = new Escaper();
     </tbody>
 </table>
 
-<?php require __DIR__  . '/includes/help.php';?>
+<?php require __DIR__ . '/includes/help.php';?>
 <?php require __DIR__ . '/includes/footer.php';?>

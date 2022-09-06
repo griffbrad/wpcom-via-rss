@@ -30,19 +30,6 @@ function send_unauthorized_response()
     exit;
 }
 
-function get_sites()
-{
-	$response = request('/me/sites');
-
-    $out = [];
-
-    foreach ($response['sites'] as $site) {
-        $out[] = $site['ID'];
-    }
-
-    return $out;
-}
-
 function get_followed_sites()
 {
 	$response = request('/read/following/mine');
@@ -57,8 +44,6 @@ function get_followed_sites()
 }
 
 $me = get_me();
-
-$sites = [];
 
 $followed_sites = get_followed_sites();
 
@@ -115,4 +100,3 @@ foreach ($response['posts'] as $post) {
 header('Content-Type: application/rss+xml');
 require __DIR__ . '/includes/rss-template.php';
 exit;
-
