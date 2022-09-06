@@ -40,8 +40,6 @@ $me = get_me();
 $followed_sites = get_followed_sites();
 $followed_site_ids = array_map(fn($site): int => intval($site['blog_ID']), $followed_sites);
 
-if (isset($_GET['team']) && 'a8c' === $_GET['team']) {
-    $path       = 'a8c';
 if( 'opml' == $_GET['format'] ) {
     header('Content-Type: application/xml');
     header('Content-Disposition: attachment; filename="opml.xml"');
@@ -49,19 +47,27 @@ if( 'opml' == $_GET['format'] ) {
     exit;
 }
 
+if (isset($_GET['blog'])) {
+    $blog       = intval( $_GET['blog'] );
+    $path       = '/sites/' . $blog . '/posts';
+    $feed_title = $blog;
+} else if (isset($_GET['team']) && 'a8c' === $_GET['team']) {
+    $path       = '/read/a8c';
     $feed_title = 'a8c';
 } else {
-    $path       = 'following';
+    $path       = '/read/following';
     $feed_title = 'WordPress.com';
 }
 
-$response = request('/read/' . $path . '?number=20');
+$limit = intval( $_GET['limit'] ?? 20 );
+
+$response = request($path . '?number=' . $limit);
 $posts    = [];
 
-foreach ($response['posts'] as $post) {
-	if ('Auto Draft' === $post['title']) {
-		continue;
-	}
+foreach (($response['posts'] ?? []) as $post) {
+        if ('Auto Draft' === $post['title']) {
+                continue;
+        }
 
     $cross_post_site = false;
     $cross_post_id   = null;

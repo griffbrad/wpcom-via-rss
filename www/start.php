@@ -52,6 +52,13 @@ $escaper = new Escaper();
             </td>
         </tr>
         <tr>
+            <th scope="row">More URL options</th>
+            <td>
+                <code>?limit=20</code> - how many posts to fetch; default 20<br />
+                <code>?blog=12345</code> - returns posts only from site 12345; get the URLs from OPML
+            </td>
+        </tr>
+        <tr>
             <th scope="row">Username</th>
             <td><?php echo $escaper->escapeHtml($db_user['username']);?></td>
         </tr>
