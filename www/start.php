@@ -45,6 +45,10 @@ $escaper = new Escaper();
                 <h2>a8c</h2>
                 <a href="<?php echo BASE_URI;?>/rss.php?team=a8c"><?php echo BASE_URI;?>/rss.php?team=a8c</a>
                 <?php endif;?>
+                <br />
+                <br />
+                <h2>OPML of individual feeds</h2>
+                <a href="<?php echo BASE_URI;?>/rss.php?format=opml"><?php echo BASE_URI;?>/rss.php?format=opml</a>
             </td>
         </tr>
         <tr>

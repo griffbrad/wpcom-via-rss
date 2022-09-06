@@ -42,6 +42,13 @@ $followed_site_ids = array_map(fn($site): int => intval($site['blog_ID']), $foll
 
 if (isset($_GET['team']) && 'a8c' === $_GET['team']) {
     $path       = 'a8c';
+if( 'opml' == $_GET['format'] ) {
+    header('Content-Type: application/xml');
+    header('Content-Disposition: attachment; filename="opml.xml"');
+    require __DIR__ . '/includes/opml-template.php';
+    exit;
+}
+
     $feed_title = 'a8c';
 } else {
     $path       = 'following';
