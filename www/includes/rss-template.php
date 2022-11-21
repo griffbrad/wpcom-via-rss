@@ -125,12 +125,15 @@ function escape($input)
 			</title>
 			<link><?php escape($entry['URL']);?></link>
 			<author>
-				<?php escape($entry['site_name']);?> -
+				<?php escape($entry['site_name']);?>
+				<?php if (isset($entry['author']['first_name']) && isset($entry['author']['last_name'])):?>
+				-
 				<?php escape($entry['author']['first_name'] . ' ' . $entry['author']['last_name']);?>
 				(@<?php escape($entry['author']['login']);?>)
+				<?php endif;?>
 			</author>
 			<pubDate><?php escape(date('r', strtotime($entry['date'])));?></pubDate>
-			<guid isPermaLink="false"><?php escape($entry['guid']);?></guid>
+			<guid isPermaLink="false"><?php escape($entry['guid'] ?? '');?></guid>
             <description><![CDATA[<?php echo str_replace(PHP_EOL, ' ', filter_images($content));?>]]></description>
 		</item>
 		<?php endforeach;?>
